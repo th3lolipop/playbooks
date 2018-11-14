@@ -1,0 +1,12 @@
+---
+- hosts: test
+  name: TESTING
+  tasks:
+          - name: CHECKING KERNEL
+            command: /sbin/setenforce 1
+
+- hosts: web
+  name: TESTING
+  tasks:
+          - name: CHECKING KERNEL
+            command: /sbin/setenforce 1

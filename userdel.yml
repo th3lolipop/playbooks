@@ -1,0 +1,7 @@
+---
+- hosts: aws
+  tasks:
+          - name: User DELETE
+            user:
+                    name: waiyanmin
+                    state: absent

@@ -1,0 +1,7 @@
+---
+- name: Check Distro
+  hosts: test
+  tasks:
+          - name: shutdown server
+            command: /bin/wall hello
+            when: ansible_local.mydata.test.foo == "2"

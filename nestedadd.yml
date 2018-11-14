@@ -1,0 +1,33 @@
+---
+- name: add users
+  hosts: test
+  vars:
+   - userlist:
+      - dev001
+      - dev002
+      - ops001
+      - ops002
+   - grouplist:
+      - development
+      - operations
+  tasks: 
+   - name: Creating Groups
+     group:
+      name: "{{ item }}"
+      system: yes
+     loop: "{{ grouplist }}"
+   - name: adding DEV user
+     user:
+             name: "{{ item }}"
+             state: present
+             groups: development
+     when: '"dev" in item'
+     loop: "{{ userlist }}"
+   
+   - name: adding OPS user
+     user:
+             name: "{{ item }}"
+             state: present
+             groups: operations
+     when: '"ops" in item'
+     loop: "{{ userlist }}"

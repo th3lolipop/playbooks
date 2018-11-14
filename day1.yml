@@ -1,0 +1,23 @@
+---
+- name: first playbook
+  hosts: test
+  # vars:
+          # username: "Wai Yan Min"
+  vars_files:
+          - myvarfile.yml
+  gather_facts: True
+  tasks: 
+      - name: include vars
+        include_vars: myvars.yml
+
+      - name: ping check
+        ping:
+
+      - name: shell command test
+        shell: "echo {{ vartest }} > /tmp/managed.txt"
+        register: cmdout
+        #vars: 
+        #       username: "Wai Yan"
+      
+      - debug:
+          msg: "{{ ansible_host }}"

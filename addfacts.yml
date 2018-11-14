@@ -1,0 +1,13 @@
+---
+- name: add custom facts
+  hosts: test
+  tasks:
+        - name: add fact path
+          file:
+            path: /etc/ansible/facts.d
+            state: directory
+            mode: 0755
+        - name: copy file
+          copy:
+                  src: something
+                  dest: /etc/ansible/facts.d/mydata.fact

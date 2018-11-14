@@ -1,0 +1,20 @@
+---
+- name: nested test
+  hosts: localhost
+  vars:
+          fruits:
+           - apple
+           - orange
+           - banana
+          pets:
+           - cat
+           - dog
+           - fish    
+   
+  tasks:
+        - name: Nested Loop 
+          debug:
+           msg: " {{ item.0 }} likes {{ item.1 }} "
+          with_nested:   
+           - "{{ pets }}"
+           - "{{ fruits  }}"     

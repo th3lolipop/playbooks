@@ -1,0 +1,17 @@
+---
+- name: first playbook
+  hosts: web
+  vars:
+          username: "Wai Yan Min"
+          gather_facts: false
+  tasks:
+
+      - name: ping check
+        ping:
+
+      - name: shell command test
+        shell: "echo {{ username }} > /tmp/managed.txt"
+        register: cmdout
+        
+        # vars:
+        #       username: "Wai Yan"

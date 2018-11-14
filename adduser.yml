@@ -1,0 +1,14 @@
+---
+- name: add users
+  hosts: test
+  vars:
+   - userlist:
+      - user001
+      - user002
+  tasks: 
+   - name: adding user
+     user:
+       name: "{{ item }}"
+       state: present
+       groups: wheel
+     with_items: "{{ userlist }}"

@@ -1,0 +1,13 @@
+---
+- hosts: aws
+  tasks:
+          - name: apache install
+            yum:
+                    name: httpd
+                    state: latest
+          - name: apache start
+            service:
+                    name: httpd
+                    state: started
+                    enabled: yes
+

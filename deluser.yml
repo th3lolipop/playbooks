@@ -1,0 +1,15 @@
+---
+- name: add users
+  hosts: test
+  vars:
+   - userlist:
+      - user001
+      - user002
+  tasks: 
+   - name: Deleting user
+     user:
+       name: "{{ item }}"
+       state: absent
+       groups: wheel
+       force: yes
+     with_items: "{{ userlist }}"
