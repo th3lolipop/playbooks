@@ -1,0 +1,46 @@
+---
+- name: Mariadb Server Install
+  hosts: db
+  vars:
+    wp_db: wordpress
+    wp_user: wp_user
+    wp_pass: '*D621A1C7771F27D508950E74E27431264D013F66'
+    wp_host: 192.168.56.101
+  tasks:
+     - name: install mariadb
+       yum:
+          name: mariadb-server, mariadb
+          state: latest
+  
+     - name: add mysql cred
+       copy:
+          content: "[client]\nuser=root\npassword='wp1234!@#$'"
+          dest: ~/.my.cnf
+
+     - name: apache start & enable
+       service:
+          name: mariadb
+          state: started
+          enabled: yes
+    
+     - name: allow firewall mysql
+       firewalld:
+         service: mysql
+         permanent: yes
+         immediate: true
+         state: enabled
+     - name: create WP DB
+       mysql_db:
+         name: "{{ wp_db }}"
+         state: present
+    
+     - name: create wordpress user for db
+       mysql_user:
+         name: "{{ wp_user }}"
+         host: "{{ wp_host }}"
+         password: "{{ wp_pass }}"
+         encrypted: yes
+         priv: "{{ wp_db }}.*:ALL"
+         state: present
+
+  

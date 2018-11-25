@@ -1,0 +1,16 @@
+---
+- name: add ansible user and key
+  hosts: all
+  tasks:
+    - name: create ansible user
+      user: 
+        name: devops
+        password: "{{ 'devops123' | password_hash('sha512') }}"
+        groups: wheel
+        append: yes
+
+    - name: copy ssh key
+      authorized_key:
+        user: devops
+        state: present
+        key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"

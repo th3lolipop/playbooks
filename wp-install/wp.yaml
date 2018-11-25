@@ -1,0 +1,9 @@
+---
+- name: wp download
+  hosts: web
+  #connection: local
+  tasks:
+    - name: download latest tar
+      get_url:
+        url: https://wordpress.org/latest.tar.gz
+        dest: ./wp-latest.tar.gz
